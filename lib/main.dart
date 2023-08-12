@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   loadData() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
-      _name = _prefs.getString("NAME") ?? "nahid";
+      _name = _prefs.getString("NAME")!;
     });
   }
 
