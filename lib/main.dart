@@ -36,19 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
   late SharedPreferences _prefs;
 
   String _name = 'rual upgraded';
-  getField(String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString("NAME", value);
-
-    setState(() {
-      _name = textController.value.text;
-    });
-  }
 
   loadData() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
-      _name = _prefs.getString("NAME")!;
+      _name = _prefs.getString("NAME") ?? "rual";
     });
   }
 
@@ -78,12 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             TextButton.icon(
-                onPressed: () => () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.remove("NAME");
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.remove("NAME");
 
-                      setState(() {});
-                    },
+                  setState(() {
+                    _name = "nahiiiid";
+                  });
+                },
                 icon: const Icon(Icons.remove_done),
                 label: const Text("Remove data"))
           ],
@@ -96,4 +90,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+getField(String value) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString("NAME", value);
+
+  setState(() {
+    _name = textController.value.text;
+  });
 }
