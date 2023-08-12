@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _name = 'rual upgraded';
   getField(String value) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString("NAME", _name);
+    prefs.setString("NAME", value);
 
     setState(() {
       _name = textController.value.text;
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   loadData() async {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
-      _name = _prefs.getString("NAME")!;
+      _name = _prefs.getString("NAME") ?? 'nahid';
     });
   }
 
